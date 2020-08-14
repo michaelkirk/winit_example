@@ -58,25 +58,21 @@ pub fn main() {
             Event::WindowEvent { event: WindowEvent::KeyboardInput { .. }, .. } => {
                 #[cfg(feature = "web-sys")]
                 {
-                    log::debug!("clicked!");
-                    //let window = web_sys::window().unwrap();
-                    //window.set_cursor(1);
+                    log::debug!("keyed!");
+                    window.set_cursor_icon(winit::window::CursorIcon::Grabbing);
                 }
 
                 #[cfg(feature = "stdweb")]
                 {
-                    std_web::console!(log, "clicked!");
+                    std_web::console!(log, "keyed!");
                     window.set_cursor_icon(winit::window::CursorIcon::Wait);
                 }
+
             }
             _ => (),
         }
     });
 }
-
-//fn random_cursor() -> {
-//
-//}
 
 #[cfg(feature = "web-sys")]
 mod wasm {
