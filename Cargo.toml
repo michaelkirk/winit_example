@@ -1,0 +1,64 @@
+[package]
+name = "winit_example"
+version = "0.1.0"
+authors = ["Michael Kirk <michael.code@endoftheworl.de>"]
+edition = "2018"
+
+[features]
+web-sys = ["winit/web-sys", "web_sys", "wasm-bindgen", "instant/wasm-bindgen"]
+stdweb = ["winit/stdweb", "std_web", "instant/stdweb"]
+
+[dependencies]
+winit = "0.22"
+instant = "0.1"
+lazy_static = "1"
+libc = "0.2.64"
+log = "0.4"
+serde = { version = "1", optional = true, features = ["serde_derive"] }
+raw-window-handle = "0.3"
+bitflags = "1"
+
+
+[patch.crates-io]
+winit = { path = "/Users/mkirk/src/abs/winit" }
+
+
+[target.'cfg(target_arch = "wasm32")'.dependencies.web_sys]
+package = "web-sys"
+version = "0.3.22"
+optional = true
+features = [
+    'console',
+    'CssStyleDeclaration',
+    'BeforeUnloadEvent',
+    'Document',
+    'DomRect',
+    'Element',
+    'Event',
+    'EventTarget',
+    'FocusEvent',
+    'HtmlCanvasElement',
+    'HtmlElement',
+    'KeyboardEvent',
+    'MediaQueryList',
+    'MediaQueryListEvent',
+    'MouseEvent',
+    'Node',
+    'PointerEvent',
+    'Window',
+    'WheelEvent'
+]
+
+[target.'cfg(target_arch = "wasm32")'.dependencies.wasm-bindgen]
+version = "0.2.45"
+optional = true
+
+[target.'cfg(target_arch = "wasm32")'.dependencies.std_web]
+package = "stdweb"
+version = "=0.4.20"
+optional = true
+features = ["experimental_features_which_may_break_on_minor_version_bumps"]
+
+[target.'cfg(target_arch = "wasm32")'.dev-dependencies]
+console_log = "0.1"
+
